@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int minimumRounds(vector<int>& tasks) {
+         unordered_map<int,int> mp;
+         for(auto a:tasks) mp[a]++;
+         int minround=0;
+         for(auto a:mp){
+             if(a.second<=1)
+               return -1;
+             else if(a.second==2)
+                minround++;
+             else
+                minround+=ceil((double)a.second/3.0);
+           
+         }
+         return minround;
+    }
+};
