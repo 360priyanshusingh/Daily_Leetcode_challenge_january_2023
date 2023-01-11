@@ -1,0 +1,28 @@
+class Solution {
+public:
+
+   int dfs(int node,int p,vector<bool>& hasAppl ,vector<vector<int>>& adj){
+       int total=0,child=0;
+        for(auto i:adj[node]){
+             if(i==p) continue;
+             
+            child=dfs(i,node,hasAppl,adj);
+            
+            if(child ||  hasAppl[i]){
+                total+=child+2;
+            }
+        }
+
+         return total;
+    } 
+    int minTime(int n,vector<vector<int>>& edges,vector<bool>& hasApple) {
+      vector<vector<int>> adj(n);
+         for (auto& edge : edges) {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+
+   
+        return dfs(0,-1,hasApple,adj);
+    }
+};
