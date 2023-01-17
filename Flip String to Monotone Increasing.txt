@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int minFlipsMonoIncr(string s) {
+        int n=s.size();
+        int ones=count(s.begin(),s.end(),'1');
+        int ans=min(ones,n-ones);
+        int c1=0;
+        for(int i=0;i<n;i++){
+            if(s[i]=='1') c1++;
+            int curr=c1+((n-i-1)-(ones-c1));
+            ans=min(ans,curr);
+        }
+       return ans;
+    }
+};

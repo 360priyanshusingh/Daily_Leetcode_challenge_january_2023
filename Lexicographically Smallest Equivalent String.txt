@@ -1,0 +1,29 @@
+class Solution {
+public:
+    char getparent(char a, vector<int> &parent){
+        if(parent[a -'a']==-1)
+        return a;
+        return parent[a-'a']=getparent(parent[a-'a'] ,parent);
+
+    }
+    string smallestEquivalentString(string s1, string s2, string baseStr) {
+        vector<int> parent(26,-1);
+        for(int i=0;i<s1.size();i++){
+            char c1=getparent(s1[i],parent);
+            char c2=getparent(s2[i],parent);
+            
+            if(c1==c2)
+                continue;
+            else if(c1 > c2)
+                parent[c1-'a']=c2;
+            else
+                parent[c2-'a']=c1;
+        }
+        string ans="";
+        for(auto a:baseStr){
+          ans+=getparent(a,parent);
+        }
+
+        return ans;
+    }
+};
