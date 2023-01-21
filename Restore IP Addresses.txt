@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void getvalidans(vector<string> &ips,vector<string> &tem,int index,string &s){
+        if(index==s.size() && tem.size()==4){
+            string ans;
+            ans=tem[0]+'.'+tem[1]+'.'+tem[2]+'.'+tem[3];
+            ips.push_back(ans);
+            return ;
+        }
+
+        string strtem="";
+        for(int i=index;i<s.size() && tem.size()<4;i++){
+                if(s[i]-'0'>9) continue;
+
+                strtem+=s[i];
+                int a=stoi(strtem);
+                if(a>=0 && a<=255){
+                     tem.push_back(strtem);
+                     getvalidans(ips,tem,i+1,s);
+                     tem.pop_back();
+                }
+                if(a<=0  || a>255)
+                   break;
+
+        }
+
+    }
+    vector<string> restoreIpAddresses(string s) {
+        vector<string> ips;
+        vector<string> tem;
+        getvalidans(ips,tem,0,s);
+        return ips;
+    }
+};

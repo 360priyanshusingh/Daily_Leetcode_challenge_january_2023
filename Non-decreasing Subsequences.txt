@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void helper(vector<int>& nums,int index,int preindex,vector<int>& ans,set<vector<int>> &ans2){
+        if(index>=nums.size()){
+          if(ans.size()>=2){
+              ans2.insert(ans);
+          }
+          return ;
+        }
+         
+        if(preindex==-1 || nums[index]>=nums[preindex]){    
+            ans.push_back(nums[index])  ;
+            helper(nums,index+1,index,ans,ans2);
+            ans.pop_back();
+        }
+
+        helper(nums,index+1,preindex,ans,ans2);
+       
+        return ;
+
+    }
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        vector<int> ans;
+        set <vector<int>> ans2;
+        helper(nums,0,-1,ans,ans2);
+        vector<vector<int>> priya;
+        for(auto a:ans2){
+            priya.push_back(a);
+        }
+
+        return priya;
+    }
+};
